@@ -1,6 +1,6 @@
 # Hacking con Python #
 
-Guia en base a curso de hacking con python de @jdaniel conocido como Adastra en el mundo del hacking pueden encontrar el curso gratuito aqui --> `http://clkmein.com/qBVMFo` <--
+Guia en base a curso de hacking con python de @jdaniel conocido como Adastra en el mundo del hacking pueden encontrar el [curso gratuito aqui](http://clkmein.com/qBVMFo)
 
 A continuación les describire un poco de las diferentes librerias mencionadas en el curso
 
