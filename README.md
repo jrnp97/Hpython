@@ -13,7 +13,7 @@ Para más información acerca del concepto puede consultar en https://www.ecured
 
 * Es una libreria por defecto en python para utilizarla simplemente se importa `import socket`
 
-En el script *banner_grabbing.py* se hace uso de esta brevemente para el reconocimiento de banners con vulnerables, se preguntaran que es un banners, bueno
+En el script [banner_grabbing.py](https://github.com/DGun17/Hpython/blob/master/Scripts/banner_grabbing.py) se hace uso de esta brevemente para el reconocimiento de banners con vulnerables, se preguntaran que es un banners, bueno
 
 Cuando uno realiza un scaneo de puertos normalmente se puede apreciar algo como 
 
@@ -38,7 +38,7 @@ Ya explicado lo mas basico del protocolo ICMP, haré referencia al modulo subpro
 * curl 
 * nc
 
-El script donde se usa el modulo subprocess para la utilización del comando ping lleva como nombre *basic_recon.py*
+El script donde se usa el modulo subprocess para la utilización del comando ping lleva como nombre [basic_recon.py](https://github.com/DGun17/Hpython/blob/master/Scripts/basic_recon.py)
 
 
 ## DNSPython ##
