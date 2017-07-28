@@ -65,7 +65,7 @@ Para la instlación de DNSPython se puede utilizar pip `$ pip install DNSPython`
 
 En el siguiente script se realizan ejemplos de procesos con DNSPython
 
-`dns_consult.py`
+[dns_consult.py](https://github.com/DGun17/Hpython/blob/master/Scripts/dns_consult.py)
 
 
 
