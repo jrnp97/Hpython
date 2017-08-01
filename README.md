@@ -68,5 +68,102 @@ En el siguiente script se realizan ejemplos de procesos con DNSPython
 [dns_consult.py](https://github.com/DGun17/Hpython/blob/master/Scripts/dns_consult.py)
 
 
+## SMTP ##
+
+SMTP (Simple Mail Transfer Protocol), es un protocolo de tranferencia de correos el cual funciona bajo la arquitectura de Cliente-Servidor se ejecuta en la capa 7 (aplicación) del modelo OSI, por limitaciones directas del protocolo se utiliza en conjunto con los protocolos IMAP (Internet Message Access Protocol - Protocolo de acceso a mensajes de internet) y POP (Post Office Protocol - Protocolo de oficina de correo), normalmente el servicio SMTP se ejecuta en el puerto 25/TCP.
+
+Ademas del mencionado existen otros puertos comunes en el cual se ejecutaria el protocolo
+
+```
+PORT 53 - TCP
+PORT 587 - TCP (Alternativos para clientes)
+PORT 465 - TCP (SMTPS)
+```
+
+Para el entendimiento del funcionamiento del protocolo SMTP hay que tener en claro 3 conceptos 
+
+**Usados por SMTP**
+
+**MUA** (Mail User Agent) - (Agente de Usuarios de Correo)
+
+	* Es el encargado de la interacción con el usuario para el "mostrado" de correos electronicos y la creación de estos, un ejemplo de un MUA puede ser "Gmail, Hotmail", son aplicaciones que proveen lo anterior ya explicado.
+
+**MTA** - Mail Transfer Agente (Agente de Transferencia de Correo)
+
+	* Es el encargado del envio de correos (NO de su entrega) atravez de la red usando el protocolo SMTP, distribuye los mensajes en medio de los distintos servidores SMTP.
+
+**MDA** - Mail Deliever Agent (Agente de Entrega de Correo)
+
+	* Es agente encargado de la ENTREGA del correo enviado por SMTP, para la entrega de este hace uso del protocolo POP (Post Office Protocol).
+
+A continuación un esquema de funcionamiento:
+
+![](images/2.png)
+
+Gracias a estos agentes se puede llevar el proceso de entrega de correos SMTP, cabe aclarar que he explicado el funciomiento de SMTP junto con POP, no con IMAC, en este ultimo se utiliza el MSA (Mail Submission Agent) *Averiguen su funcionamiento con este, no todo se le puede dar xD*
+
+Nada pero pueden conseguir un excelente curso de redes sobre modelo OSI y TCP/IP [AQUI](http://destyy.com/qNS6X1)
+
+Ya explicado un poco sobre el protocolo SMTP, el protocolo cuenta con alguna serie de comandos para la verificación de usuarios en el servidor (comando vrfy), entonces si un usuario se encuentra registrado se retorna un codigo 250, sino se encuentra se retorna el codigo 550 basandonos de esto en el script se establecera una conexion SMTP y buscara la existencia de usuarios en una lista dada.
+
+En el siguiente script se realiza la verificación de usuarios teniendo en cuenta el proceso descrito anteriomente
+
+[stmp_single.py](https://github.com/DGun17/Hpython/blob/master/Scripts/smtp_single.py)
+
+## SCAPY ##
+
+Scapy es un paquete o modulo de python que permite la creación de paquetes y el envio de estos con el lenguaje de programación de este post *python*, cabe resaltar que al ser un modulo cuenta con una documentación oficial que se podra encontrar 
+
+* https://scapy.readthedocs.io/en/latest/ 
+
+se puede usar de 2 formas a modo de API o modo de interprete (este simplemente utilizando el comando `$ scapy`)
+
+Además scapy soporta el estandar de filtros [BPF](https://biot.com/capstats/bpf.html) aplicable a información sobre paquetes o capturas activas.
+
+**Nota:** para la creación de paquetes se debe especificar el tipo de protocolo a usar en cada una de las capas del modelo TCP/IP comenzando por supuesto desde la primera hasta la 5 separadas por un **/** ejemplo
+
+packet = Ether[]/IP[dest= "google.com"]/ICMP[]/"ABCD"
+
+Se realizo la creación del paquete tipo ICMP declarando la información de las capas 
+
+**Aplicacion** :  "ABCD", su PDU se denomina DATA
+**Transporte** : IP, su PDU en este caso se denomina SEGMENTO por el uso de TCP
+**Red** : ICMP, su PDU se denomina PAQUETE
+**Enlace** : Ether, su PDU se denomina FRAME (en esta se asigna un tipo de HEADER dependiendo del medio).
+
+Algunas funciones interesantes del modulo scapy son 
+
+**ls** - Permite listar todos los protocolos disponibles a usar por el modulo.
+
+**lsc** - Permite listar todas las acciones (funciones) disponibles.
+
+Si se utiliza la funcion ls y en sus argumentos se instancia un paquete creado se podra apreciar la información de este, es decir si consultamos `$ ls(packet)` se enlistara la información del paquete.
+
+**sendp** - Permite enviar un paquete ya "formado", ejemplo `$ sendp(packet)`.
+
+si ademas del paquete se puede establecer los atributos
+
+*loop* - Establece la cantidad de veces que se enviara el paquete.
+
+*inter* - Establece el tiempo de espera entre envios de paquetes.
+
+**sr1** - Permite enviar un paquete y recibir una respuesta por ello.
+
+Exite una variable especial "_" que hace referencia a el ultimo paquete recibido y todas las funcionas "invocadas" a esta variable mostrata la información respecto al paquete recibido.
+
+**show** - Permite mostrar la información de un paquete recibido.
+
+**summary** - Muestra la información de un paquete recibido de forma simple.
+
+**sniff** - Permite la captura de paquetes, algunos atributos que se pueden destacar son
+
+*iface* - Establece la interfaz a realizar sniffing.
+*count* - Establece un numero limite de paquetes a capturar.
+*prn* - Permite la ejecución de funciones al momento de capturar un paquete.
+*filter* - Permite aplicar filtros en formato BPF.
+
+**wrpcap** - Permite guardar en un archivo .pcap información de paquetes su estructura basica es `wrpcap("archivo.pcap", <variable con ifnormación de paquetes>)`.
+
+**rdpcap** - Permite leer un fichero .pcap.
 
 
